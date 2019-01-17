@@ -23,6 +23,9 @@ router
     let query = ctx.query;
     // jsonp 的本质就是服务器返回一个事先商定好的函数执行的文本
     ctx.body = query.callback + "('我是jsonp返回的东东')";
+  })
+  .get("/get", async ctx => {
+    ctx.body = "我是一个ajax发送的get请求";
   });
 
 app.use(

@@ -10,7 +10,7 @@ const getParams = data => {
     normalizeParams = paramsArray.join("&");
     return normalizeParams;
   } else {
-    normalizeParams = null;
+    normalizeParams = "";
     return normalizeParams;
   }
 };
@@ -52,7 +52,7 @@ const ajax = options => {
 };
 
 /** 使用ajax */
-
+// post
 var options = {
   type: "post",
   url: "http://127.0.0.1:3000/post",
@@ -66,3 +66,15 @@ var options = {
 };
 
 ajax(options);
+
+// get
+ajax({
+  type: "get",
+  url: "http://127.0.0.1:3000/get",
+  data: {},
+  success: responseText => {
+    console.log("get返回了", responseText);
+  }
+});
+
+/** get 和 post 都可能出现跨域 */
