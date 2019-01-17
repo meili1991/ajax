@@ -24,16 +24,26 @@ const ajax = options => {
     : new ActiveXObject("Microsoft.XMLHTTP");
   // 监听请求状态改变
   xhr.onreadystatechange = () => {
-    console.log("readyState:" + xhr.readyState, "status:" + xhr.status);
+    console.log(
+      "readyState:" + xhr.readyState,
+      "status:" + xhr.status,
+      "statusText" + xhr.statusText
+    );
     if ((xhr.readyState == 4 && xhr.status == 200) || xhr.status == 304) {
       options.success(xhr.responseText);
     }
+  };
+  // 设置超时提醒 ie8不支持
+  xhr.timeout = 10000;
+  xhr.ontimeout = () => {
+    alert("请求超时");
   };
   // 开启并发送请求
   if (options.type.toUpperCase() == "GET") {
     xhr.open("GET", options.url + "?" + params, true);
     xhr.send(null);
-  } else {
+  }
+  if (options.type.toUpperCase() == "POST") {
     xhr.open("POST", options.url, true);
     // 让post请求像html表单那样传递数据
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
