@@ -24,7 +24,7 @@ router
     // jsonp 的本质就是服务器返回一个事先商定好的函数执行的文本
     ctx.body = query.callback + "('我是jsonp返回的东东')";
   });
-/*
+
 app.use(
   CORS({
     origin: function(ctx) {
@@ -42,7 +42,7 @@ app.use(
     allowHeaders: ["Content-Type", "Authorization", "Accept"]
   })
 );
-*/
+
 app.use(bodyParser());
 app.use(router.routes()).use(router.allowedMethods());
 
