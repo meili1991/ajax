@@ -82,6 +82,7 @@ ajax({
 });
 
 /** get 和 post 都可能出现跨域 */
+/** 只有ajax才会出现跨域？ajax是其中之一 */
 
 // OPTIONS
 
