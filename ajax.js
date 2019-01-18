@@ -49,6 +49,10 @@ const ajax = options => {
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(params);
   }
+  if (options.type.toUpperCase() == "OPTIONS") {
+    xhr.open("OPTIONS", options.url, true);
+    xhr.send();
+  }
 };
 
 /** 使用ajax */
@@ -78,3 +82,13 @@ ajax({
 });
 
 /** get 和 post 都可能出现跨域 */
+
+// OPTIONS
+
+ajax({
+  type: "options",
+  url: "http://127.0.0.1:3000",
+  success: responseText => {
+    console.log("option返回了", responseText);
+  }
+});

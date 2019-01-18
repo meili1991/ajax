@@ -41,14 +41,18 @@ app.use(
     exposeHeaders: ["WWW-Authenticate", "Server-Authorization"],
     maxAge: 5,
     credentials: true,
-    allowMethods: ["GET", "POST", "DELETE"], //设置允许的HTTP请求类型
+    allowMethods: ["GET", "PUT", "POST", "PATCH", "DELETE", "HEAD", "OPTIONS"], //设置允许的HTTP请求类型
     allowHeaders: ["Content-Type", "Authorization", "Accept"]
   })
 );
 
 app.use(bodyParser());
 app.use(router.routes()).use(router.allowedMethods());
-
+app.use(ctx => {
+  if (ctx.request.method == "OPTIONS") {
+    ctx.body = "我支持所有请求方法";
+  }
+});
 app.listen(3000, () => {
   console.log("koa框架启动于http://127.0.0.1:3000");
 });
